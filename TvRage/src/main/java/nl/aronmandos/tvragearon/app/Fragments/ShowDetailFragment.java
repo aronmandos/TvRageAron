@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import nl.aronmandos.tvragearon.app.Communication.RetrieveShow;
+import nl.aronmandos.tvragearon.app.Communication.ShowHandler;
 import nl.aronmandos.tvragearon.app.Domain.Show;
 import nl.aronmandos.tvragearon.app.R;
 import nl.aronmandos.tvragearon.app.dummy.DummyContent;
@@ -21,7 +22,7 @@ import org.springframework.web.client.RestTemplate;
  * in two-pane mode (on tablets) or a {@link nl.aronmandos.tvragearon.app.Activities.ShowDetailActivity}
  * on handsets.
  */
-public class ShowDetailFragment extends Fragment {
+public class ShowDetailFragment extends Fragment implements ShowHandler {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -64,7 +65,14 @@ public class ShowDetailFragment extends Fragment {
         TextView testView = (TextView) rootView.findViewById(R.id.show_detail2);
         testView.setText("Hello World! ");
 
-        new RetrieveShow().execute(testView, 18164);
+        RetrieveShow rs = new RetrieveShow();
+        rs.setHandler(this);
+        rs.execute(18164);
         return rootView;
+    }
+
+    @Override
+    public void handleShow(Show show) {
+
     }
 }

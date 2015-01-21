@@ -6,27 +6,38 @@ import nl.aronmandos.tvragearon.app.Domain.Show;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Method;
+
 /**
  * Created by Aron on 21-1-2015.
  */
-public class RetrieveShow extends AsyncTask<Object, Void, String> {
+public class RetrieveShow extends AsyncTask<Integer, Void, Show> {
+    public ShowHandler getHandler() {
+        return handler;
+    }
 
-    TextView testView;
+    public void setHandler(ShowHandler handler) {
+        this.handler = handler;
+    }
+
+    private ShowHandler handler;
+
 
     @Override
-    protected String doInBackground(Object[] params) {
-        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid="+params[1];
+    protected Show doInBackground(Integer[] params) {
+        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid=18164"+params[0];
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
-        testView = (TextView) params[0];
         Show show = restTemplate.getForObject(url, Show.class);
-        //testView.setText("Hello " +show.getName());
         System.out.println("TEST    TEST "+ show.getName());
-        return show.getName();
+        return show;
     }
 
-    protected void onPostExecute(String result) {
-        testView.setText("Hello " + result);
+    protected void onPostExecute(Show result) {
+        if(handler != null) {
+            handler.handleShow(result);
+        }
+
     }
 }
