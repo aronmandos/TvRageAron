@@ -9,16 +9,24 @@ import org.springframework.web.client.RestTemplate;
 /**
  * Created by Aron on 21-1-2015.
  */
-public class RetrieveShow extends AsyncTask {
+public class RetrieveShow extends AsyncTask<Object, Void, String> {
+
+    TextView testView;
+
     @Override
-    protected Object doInBackground(Object[] params) {
-        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid=18164";
+    protected String doInBackground(Object[] params) {
+        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid="+params[1];
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
-        TextView testView = (TextView) params[0];
+        testView = (TextView) params[0];
         Show show = restTemplate.getForObject(url, Show.class);
-        testView.setText("Hello " +show.getName());
-        return show;
+        //testView.setText("Hello " +show.getName());
+        System.out.println("TEST    TEST "+ show.getName());
+        return show.getName();
+    }
+
+    protected void onPostExecute(String result) {
+        testView.setText("Hello " + result);
     }
 }

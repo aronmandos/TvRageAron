@@ -64,7 +64,7 @@ public class ShowDetailFragment extends Fragment {
         TextView testView = (TextView) rootView.findViewById(R.id.show_detail2);
         testView.setText("Hello World! ");
 
-        new RetrieveShow().execute(testView);
+        new RetrieveShow().execute(testView, 18164);
         return rootView;
     }
 }
