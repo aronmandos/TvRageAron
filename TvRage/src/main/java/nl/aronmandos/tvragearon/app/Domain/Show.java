@@ -11,6 +11,12 @@ import java.util.List;
  */
 @Root(strict=false)
 public class Show {
+
+    public Show(String showid, String name ) {
+        this.setName(name);
+        this.setShowid(showid);
+    }
+
     public String getName() {
         return name;
     }
@@ -75,20 +81,20 @@ public class Show {
         this.origin_country = origin_country;
     }
 
-    /*public ArrayList<String> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(ArrayList<String> genres) {
-        this.genres = genres;
-    }*/
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
     }
 
     public List<Season> getEpisodelist() {
@@ -103,27 +109,29 @@ public class Show {
     private String type;
     @Element
     private String name;
-    @Element
+    @Element(required = false)
     private String totalseasons;
     @Element
     private String showid;
-    @Element
+    @Element(required = false)
     private String showlink;
-    @Element
+    @Element(required = false)
     private String started;
-    @Element
+    @Element(required = false)
     private String ended;
-    @Element
+    @Element(required = false)
     private String image;
-    @Element
+    @Element(required = false)
     private String origin_country;
-    @Element
+    @Element(required = false)
     private String status;
-    //TODO @ElementArray(entry="genre")
-    //private ArrayList<String> genres;
-    @ElementList(name = "Episodelist", entry="Season")
+    @ElementList(name = "genres", entry="genre", required = false)
+    private List<Genre> genres;
+    @ElementList(name = "Episodelist", entry="Season", required = false)
     private List<Season> Episodelist;
 
-
-
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }

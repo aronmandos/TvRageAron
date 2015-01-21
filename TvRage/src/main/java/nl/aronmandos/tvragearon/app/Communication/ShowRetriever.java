@@ -11,7 +11,19 @@ import java.lang.reflect.Method;
 /**
  * Created by Aron on 21-1-2015.
  */
-public class RetrieveShow extends AsyncTask<Integer, Void, Show> {
+public class ShowRetriever extends AsyncTask<Integer, Void, Show> {
+
+    private ShowHandler handler;
+
+    public ShowRetriever() {
+        super();
+    }
+
+    public ShowRetriever(ShowHandler handler) {
+        super();
+        this.handler = handler;
+    }
+
     public ShowHandler getHandler() {
         return handler;
     }
@@ -20,17 +32,13 @@ public class RetrieveShow extends AsyncTask<Integer, Void, Show> {
         this.handler = handler;
     }
 
-    private ShowHandler handler;
-
-
     @Override
-    protected Show doInBackground(Integer[] params) {
-        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid=18164"+params[0];
+    protected Show doInBackground(Integer[] showIds) {
+        final String url = "http://services.tvrage.com/feeds/full_show_info.php?sid="+showIds[0];
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new SimpleXmlHttpMessageConverter());
         Show show = restTemplate.getForObject(url, Show.class);
-        System.out.println("TEST    TEST "+ show.getName());
         return show;
     }
 

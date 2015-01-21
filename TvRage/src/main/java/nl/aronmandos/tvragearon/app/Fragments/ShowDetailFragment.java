@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import nl.aronmandos.tvragearon.app.Communication.RetrieveShow;
+import nl.aronmandos.tvragearon.app.Communication.ShowRetriever;
 import nl.aronmandos.tvragearon.app.Communication.ShowHandler;
 import nl.aronmandos.tvragearon.app.Domain.Show;
 import nl.aronmandos.tvragearon.app.R;
 import nl.aronmandos.tvragearon.app.dummy.DummyContent;
-import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * A fragment representing a single Show detail screen.
@@ -23,6 +21,9 @@ import org.springframework.web.client.RestTemplate;
  * on handsets.
  */
 public class ShowDetailFragment extends Fragment implements ShowHandler {
+
+    TextView testView;
+
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -62,17 +63,15 @@ public class ShowDetailFragment extends Fragment implements ShowHandler {
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.show_detail)).setText(mItem.content);
         }
-        TextView testView = (TextView) rootView.findViewById(R.id.show_detail2);
+        testView = (TextView) rootView.findViewById(R.id.show_detail2);
         testView.setText("Hello World! ");
 
-        RetrieveShow rs = new RetrieveShow();
-        rs.setHandler(this);
-        rs.execute(18164);
+        new ShowRetriever(this).execute(18164);
         return rootView;
     }
 
     @Override
     public void handleShow(Show show) {
-
+        testView.setText(show.getName());
     }
 }
