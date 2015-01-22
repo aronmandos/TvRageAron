@@ -1,0 +1,32 @@
+Beste heren,
+
+Van de week ben ik ziek geweest, bij deze krijgen jullie alsnog de herkansingsopdracht.
+
+Volgens mij hebben jullie wel lang genoeg naar de MyHealth-app gekeken, dus jullie mogen de eindopdracht van de Android-workshop doen waar we destijds niet aan toegekomen zijn. Het moet een native app zijn en je moet de code uiteraard zelf schrijven. Bij de demo kan (zal) er ook naar een toelichting bij de broncode worden gevraagd.
+
+Veel succes!
+
+Met vriendelijke groet,
+Arthur Perton
+
+Eindopracht:
+---------------
+Maak een app voor liefhebbers van TV-series. De app heeft de volgende features:
+- De gebruiker kan een zoekterm invoeren en op "zoek" drukken. De term wordt dan gebruikt om op TVRage naar series te zoeken.
+- De gebruiker ziet een lijst met namen van series (de zoekresultaten). De gebruiker kan een serie aantikken.
+- De gebruiker ziet enkele details van de gekozen serie, waaronder een afbeelding, titel, genre(s) en paar andere details.
+
+Voorbeelden van URL's die je nodig hebt:
+-------------------------------------------------
+http://services.tvrage.com/feeds/search.php?show=bad
+http://services.tvrage.com/feeds/full_show_info.php?sid=18164
+
+De URL naar de info over XML parsen in Android:
+-----------------------------------------------------------
+http://developer.android.com/training/basics/network-ops/xml.html
+
+Aandachtspunten:
+----------------------
+- Laat de GUI niet blokkeren!
+- Maak een generieke subclass van AsyncTask (geen code duplicatie).
+- EXTRA: Gebruik een voortgangsindicator tijdens het ophalen van informatie.

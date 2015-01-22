@@ -1,17 +1,13 @@
-package nl.aronmandos.tvragearon.app.Activities;
+package nl.aronmandos.tvragearon.app.Models;
 
 import nl.aronmandos.tvragearon.app.Domain.Show;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Helper class for providing sample content for user interfaces created by
- * Android template wizards.
+ *
  * <p/>
- * TODO: Replace all uses of this class before publishing your app.
  */
 public class ShowList {
 

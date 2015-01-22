@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import nl.aronmandos.tvragearon.app.Activities.ShowList;
-import nl.aronmandos.tvragearon.app.Communication.handlers.SearchResultsHandler;
 import nl.aronmandos.tvragearon.app.Communication.SearchResultsTask;
+import nl.aronmandos.tvragearon.app.Communication.handlers.SearchResultsHandler;
 import nl.aronmandos.tvragearon.app.Domain.SearchResults;
 import nl.aronmandos.tvragearon.app.Domain.Show;
+import nl.aronmandos.tvragearon.app.Models.ShowList;
 
 /**
  * A list fragment representing a list of Shows. This fragment
@@ -103,7 +103,6 @@ public class ShowListFragment extends ListFragment implements SearchView.OnQuery
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 ShowList.SHOWS);
-        // TODO: replace with a real list adapter.
         setListAdapter(adapter);
     }
 

@@ -8,15 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import nl.aronmandos.tvragearon.app.Activities.ShowList;
-import nl.aronmandos.tvragearon.app.Communication.handlers.ShowHandler;
 import nl.aronmandos.tvragearon.app.Communication.RetrieveShowTask;
+import nl.aronmandos.tvragearon.app.Communication.handlers.ShowHandler;
 import nl.aronmandos.tvragearon.app.Domain.Genre;
 import nl.aronmandos.tvragearon.app.Domain.Show;
+import nl.aronmandos.tvragearon.app.Models.ShowList;
 import nl.aronmandos.tvragearon.app.R;
-
-import java.security.Key;
-import java.util.Map;
 
 /**
  * A fragment representing a single Show detail screen.
