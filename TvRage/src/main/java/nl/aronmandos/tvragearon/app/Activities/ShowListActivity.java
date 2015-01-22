@@ -3,9 +3,12 @@ package nl.aronmandos.tvragearon.app.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import nl.aronmandos.tvragearon.app.R;
+import android.widget.SearchView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import nl.aronmandos.tvragearon.app.Fragments.ShowDetailFragment;
 import nl.aronmandos.tvragearon.app.Fragments.ShowListFragment;
+import nl.aronmandos.tvragearon.app.R;
 
 
 /**
@@ -32,11 +35,14 @@ public class ShowListActivity extends FragmentActivity
      */
     private boolean mTwoPane;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_list);
 
+        ShowListFragment fragment = ((ShowListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.show_list));
         if (findViewById(R.id.show_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -46,12 +52,17 @@ public class ShowListActivity extends FragmentActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((ShowListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.show_list))
-                    .setActivateOnItemClick(true);
+            fragment.setActivateOnItemClick(true);
+
         }
 
-        // TODO: If exposing deep links into your app, handle intents here.
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+
+        searchView.setOnQueryTextListener(fragment);
+
+        //image loader config
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);
     }
 
     /**

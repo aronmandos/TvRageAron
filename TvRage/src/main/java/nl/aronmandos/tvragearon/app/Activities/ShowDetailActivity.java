@@ -3,10 +3,9 @@ package nl.aronmandos.tvragearon.app.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-
 import android.view.MenuItem;
-import nl.aronmandos.tvragearon.app.R;
 import nl.aronmandos.tvragearon.app.Fragments.ShowDetailFragment;
+import nl.aronmandos.tvragearon.app.R;
 
 
 /**

@@ -1,10 +1,23 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          android:id="@+id/show_list"
-          android:name="nl.aronmandos.tvragearon.app.Fragments.ShowListFragment"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:layout_marginLeft="16dp"
-          android:layout_marginRight="16dp"
-          tools:context=".ShowListActivity"
-          tools:layout="@android:layout/list_content"/>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        android:orientation="vertical">
+    <SearchView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/searchView"
+            android:queryHint="@string/search_hint"
+            android:iconifiedByDefault="false"/>
+    <fragment
+              android:id="@+id/show_list"
+              android:name="nl.aronmandos.tvragearon.app.Fragments.ShowListFragment"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              tools:context=".ShowListActivity"
+              tools:layout="@android:layout/list_content"/>
+</LinearLayout>
+

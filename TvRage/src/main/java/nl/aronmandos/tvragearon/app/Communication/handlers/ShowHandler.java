@@ -1,4 +1,4 @@
-package nl.aronmandos.tvragearon.app.Communication;
+package nl.aronmandos.tvragearon.app.Communication.handlers;
 
 import nl.aronmandos.tvragearon.app.Domain.Show;
 

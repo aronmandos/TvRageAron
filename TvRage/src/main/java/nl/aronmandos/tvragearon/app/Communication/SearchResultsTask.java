@@ -1,8 +1,8 @@
 package nl.aronmandos.tvragearon.app.Communication;
 
 import android.os.AsyncTask;
+import nl.aronmandos.tvragearon.app.Communication.handlers.SearchResultsHandler;
 import nl.aronmandos.tvragearon.app.Domain.SearchResults;
-import nl.aronmandos.tvragearon.app.Domain.Show;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,15 +10,15 @@ import org.springframework.web.client.RestTemplate;
  *
  * Created by Aron on 21-1-2015.
  */
-public class SearchResultsRetriever extends AsyncTask<String, Void, SearchResults> {
+public class SearchResultsTask extends AsyncTask<String, Void, SearchResults> {
 
     private SearchResultsHandler handler;
 
-    public SearchResultsRetriever() {
+    public SearchResultsTask() {
         super();
     }
 
-    public SearchResultsRetriever(SearchResultsHandler handler) {
+    public SearchResultsTask(SearchResultsHandler handler) {
         super();
         this.handler = handler;
     }

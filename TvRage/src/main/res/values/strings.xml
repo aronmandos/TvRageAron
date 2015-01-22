@@ -3,5 +3,14 @@
 
     <string name="app_name">TvRageAron</string>
     <string name="title_show_detail">Show Detail</string>
+    <string name="search_hint">Search Shows</string>
+    <string name="header_title">Title</string>
+    <string name="header_genres">Genres</string>
+    <string name="header_image">Image</string>
+    <string name="header_started">started</string>
+    <string name="header_ended">Ended</string>
+    <string name="header_status">Status</string>
+    <string name="header_link">More information</string>
+
 
 </resources>

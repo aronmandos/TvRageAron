@@ -1,8 +1,10 @@
 package nl.aronmandos.tvragearon.app.Domain;
 
-import org.simpleframework.xml.*;
+import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +14,36 @@ import java.util.List;
 @Root(strict=false)
 public class Show {
 
+    @Attribute(name = "type", required = false)
+    private String type;
+    @Element
+    private String name;
+    @Element(required = false)
+    private String totalseasons;
+    @Element
+    private String showid;
+    @Element(required = false)
+    private String showlink;
+    @Element(required = false)
+    private String link;
+    @Element(required = false)
+    private String started;
+    @Element(required = false)
+    private String ended;
+    @Element(required = false)
+    private String image;
+    @Element(required = false)
+    private String origin_country;
+    @Element(required = false)
+    private String status;
+    @ElementList(name = "genres", entry="genre", required = false)
+    private List<Genre> genres;
+    @ElementList(name = "Episodelist", entry="Season", required = false)
+    private List<Season> Episodelist;
+
+    public Show() {
+
+    }
     public Show(String showid, String name ) {
         this.setName(name);
         this.setShowid(showid);
@@ -41,12 +73,31 @@ public class Show {
         this.showid = showid;
     }
 
+    public String getInfoLink() {
+        if (link != null && !link.isEmpty()) {
+            return link;
+        } else if (showlink != null && !showlink.isEmpty()) {
+            return showlink;
+        } else {
+            return null;
+        }
+
+    }
+
     public String getShowlink() {
         return showlink;
     }
 
     public void setShowlink(String showlink) {
         this.showlink = showlink;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public String getStarted() {
@@ -104,31 +155,6 @@ public class Show {
     public void setEpisodelist(List<Season> episodelist) {
         Episodelist = episodelist;
     }
-
-    @Attribute(name = "type", required = false)
-    private String type;
-    @Element
-    private String name;
-    @Element(required = false)
-    private String totalseasons;
-    @Element
-    private String showid;
-    @Element(required = false)
-    private String showlink;
-    @Element(required = false)
-    private String started;
-    @Element(required = false)
-    private String ended;
-    @Element(required = false)
-    private String image;
-    @Element(required = false)
-    private String origin_country;
-    @Element(required = false)
-    private String status;
-    @ElementList(name = "genres", entry="genre", required = false)
-    private List<Genre> genres;
-    @ElementList(name = "Episodelist", entry="Season", required = false)
-    private List<Season> Episodelist;
 
     @Override
     public String toString() {

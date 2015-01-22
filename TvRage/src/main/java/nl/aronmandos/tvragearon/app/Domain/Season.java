@@ -4,7 +4,6 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +12,18 @@ import java.util.List;
  */
 @Root(strict=false)
 public class Season {
+
+    @Attribute (name = "type", required = false)
+    private String type;
+    @Attribute(name = "no", required = false)
+    private String no;
+    @ElementList(entry="episode", inline=true, required = false)
+    private List<Episode> Episodes;
+
+    public Season() {
+
+    }
+
     public String getType() {
         return type;
     }
@@ -37,10 +48,12 @@ public class Season {
         Episodes = episodes;
     }
 
-    @Attribute (name = "type", required = false)
-    private String type;
-    @Attribute(name = "no", required = false)
-    private String no;
-    @ElementList(entry="episode", inline=true)
-    private List<Episode> Episodes;
+    @Override
+    public String toString() {
+        String temp = "Season";
+        if (!this.getNo().isEmpty()) {
+            temp += " " + this.getNo();
+        }
+        return temp;
+    }
 }

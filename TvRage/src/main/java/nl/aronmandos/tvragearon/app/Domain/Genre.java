@@ -4,10 +4,18 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
 
 /**
+ *
  * Created by Aron on 21-1-2015.
  */
 @Root(strict = false)
 public class Genre {
+
+    @Text
+    private String value;
+
+    public Genre() {
+
+    }
 
     public String getValue() {
         return value;
@@ -17,6 +25,8 @@ public class Genre {
         this.value = value;
     }
 
-    @Text
-    private String value;
+    @Override
+    public String toString() {
+        return this.getValue();
+    }
 }

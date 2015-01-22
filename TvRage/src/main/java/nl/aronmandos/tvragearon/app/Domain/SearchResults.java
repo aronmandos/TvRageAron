@@ -14,4 +14,18 @@ public class SearchResults {
 
     @ElementList(entry="show", required = false, inline = true)
     private List<Show> shows;
+
+    public SearchResults() {
+
+    }
+
+    public List<Show> getShows() {
+        return shows;
+    }
+
+    public void setShows(List<Show> shows) {
+        this.shows = shows;
+    }
+
+
 }

@@ -5,14 +5,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-
-import nl.aronmandos.tvragearon.app.Communication.ShowRetriever;
-import nl.aronmandos.tvragearon.app.Communication.ShowHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import nl.aronmandos.tvragearon.app.Activities.ShowList;
+import nl.aronmandos.tvragearon.app.Communication.handlers.ShowHandler;
+import nl.aronmandos.tvragearon.app.Communication.RetrieveShowTask;
+import nl.aronmandos.tvragearon.app.Domain.Genre;
 import nl.aronmandos.tvragearon.app.Domain.Show;
 import nl.aronmandos.tvragearon.app.R;
-import nl.aronmandos.tvragearon.app.dummy.DummyContent;
+
+import java.security.Key;
+import java.util.Map;
 
 /**
  * A fragment representing a single Show detail screen.
@@ -22,7 +26,13 @@ import nl.aronmandos.tvragearon.app.dummy.DummyContent;
  */
 public class ShowDetailFragment extends Fragment implements ShowHandler {
 
-    TextView testView;
+    TextView titleView;
+    TextView startedView;
+    TextView endedView;
+    TextView statusView;
+    TextView genresView;
+    ImageView imageView;
+    TextView linkView;
 
     /**
      * The fragment argument representing the item ID that this fragment
@@ -33,7 +43,7 @@ public class ShowDetailFragment extends Fragment implements ShowHandler {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Show mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,8 +60,10 @@ public class ShowDetailFragment extends Fragment implements ShowHandler {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = ShowList.getShowById(getArguments().getString(ARG_ITEM_ID));
         }
+
+
     }
 
     @Override
@@ -60,18 +72,49 @@ public class ShowDetailFragment extends Fragment implements ShowHandler {
         View rootView = inflater.inflate(R.layout.fragment_show_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.show_detail)).setText(mItem.content);
-        }
-        testView = (TextView) rootView.findViewById(R.id.show_detail2);
-        testView.setText("Hello World! ");
 
-        new ShowRetriever(this).execute(18164);
+        titleView = (TextView) rootView.findViewById(R.id.show_title);
+        startedView = (TextView) rootView.findViewById(R.id.show_started);
+        endedView = (TextView) rootView.findViewById(R.id.show_ended);
+        statusView = (TextView) rootView.findViewById(R.id.show_status);
+        genresView = (TextView) rootView.findViewById(R.id.show_genres);
+        imageView = (ImageView) rootView.findViewById(R.id.show_image);
+        linkView = (TextView) rootView.findViewById(R.id.show_link);
+        if (mItem != null) {
+            titleView.setText(mItem.getName());
+        }
+
+        new RetrieveShowTask(this).executeOnExecutor(RetrieveShowTask.THREAD_POOL_EXECUTOR, mItem.getShowid());
         return rootView;
     }
 
     @Override
     public void handleShow(Show show) {
-        testView.setText(show.getName());
+        titleView.setText(show.getName());
+        if (show.getStarted() != null && !show.getStarted().isEmpty()) {
+            startedView.setText(show.getStarted());
+        }
+        if (show.getEnded() != null && !show.getEnded().isEmpty()) {
+            endedView.setText(show.getEnded());
+        }
+        if (show.getStatus() != null && !show.getStatus().isEmpty()) {
+            statusView.setText(show.getStatus());
+        }
+        if (show.getGenres() != null && !show.getGenres().isEmpty()) {
+            String temp = "";
+            for (Genre genre : show.getGenres()) {
+                if (!temp.equals("")) {
+                    temp += ", ";
+                }
+                temp += genre;
+            }
+            genresView.setText(temp);
+        }
+        if (show.getImage() != null && !show.getImage().isEmpty()) {
+            ImageLoader.getInstance().displayImage(show.getImage(), imageView);
+        }
+        if (show.getInfoLink() != null && !show.getInfoLink().isEmpty()) {
+            linkView.setText(show.getInfoLink());
+        }
     }
 }

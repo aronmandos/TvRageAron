@@ -1,4 +1,4 @@
-package nl.aronmandos.tvragearon.app.Communication;
+package nl.aronmandos.tvragearon.app.Communication.handlers;
 
 import nl.aronmandos.tvragearon.app.Domain.SearchResults;
 
@@ -8,5 +8,5 @@ import nl.aronmandos.tvragearon.app.Domain.SearchResults;
  */
 public interface SearchResultsHandler {
 
-    void handleSearchResults(SearchResults results);//TODO parameter
+    void handleSearchResults(SearchResults results);
 }

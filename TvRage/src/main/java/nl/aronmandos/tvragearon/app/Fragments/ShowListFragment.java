@@ -6,9 +6,12 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-
-import nl.aronmandos.tvragearon.app.dummy.DummyContent;
+import android.widget.SearchView;
+import nl.aronmandos.tvragearon.app.Activities.ShowList;
+import nl.aronmandos.tvragearon.app.Communication.handlers.SearchResultsHandler;
+import nl.aronmandos.tvragearon.app.Communication.SearchResultsTask;
+import nl.aronmandos.tvragearon.app.Domain.SearchResults;
+import nl.aronmandos.tvragearon.app.Domain.Show;
 
 /**
  * A list fragment representing a list of Shows. This fragment
@@ -19,7 +22,7 @@ import nl.aronmandos.tvragearon.app.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class ShowListFragment extends ListFragment {
+public class ShowListFragment extends ListFragment implements SearchView.OnQueryTextListener, SearchResultsHandler{
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -37,6 +40,27 @@ public class ShowListFragment extends ListFragment {
      * The current activated item position. Only used on tablets.
      */
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    public ArrayAdapter<Show> adapter;
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        new SearchResultsTask(this).executeOnExecutor(SearchResultsTask.THREAD_POOL_EXECUTOR, query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    @Override
+    public void handleSearchResults(SearchResults results) {
+        adapter.clear();
+        for(Show show : results.getShows()) {
+            adapter.add(show);
+        }
+    }
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -67,16 +91,20 @@ public class ShowListFragment extends ListFragment {
     public ShowListFragment() {
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
+
+        adapter = new ArrayAdapter<Show>(
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                DummyContent.ITEMS));
+                ShowList.SHOWS);
+        // TODO: replace with a real list adapter.
+        setListAdapter(adapter);
     }
 
     @Override
@@ -116,7 +144,7 @@ public class ShowListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(ShowList.SHOWS.get(position).getShowid());
     }
 
     @Override

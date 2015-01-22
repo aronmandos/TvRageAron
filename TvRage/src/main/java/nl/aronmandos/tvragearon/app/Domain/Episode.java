@@ -10,6 +10,30 @@ import org.simpleframework.xml.Root;
  */
 @Root(strict=false)
 public class Episode {
+
+    @Attribute(name = "type", required = false)
+    private String type;
+    @Element(required = false)
+    private String epnum;
+    @Element(required = false)
+    private String seasonnum;
+    @Element(required = false)
+    private String airdate;
+    @Element(required = false)
+    private String link;
+    @Element
+    private String title;
+    @Element(required = false)
+    private String screencap;
+
+    public Episode() {
+
+    }
+
+    public Episode(String title) {
+        this.setTitle(title);
+    }
+
     public String getType() {
         return type;
     }
@@ -66,18 +90,8 @@ public class Episode {
         this.screencap = screencap;
     }
 
-    @Attribute(name = "type", required = false)
-    private String type;
-    @Element(required = false)
-    private String epnum;
-    @Element(required = false)
-    private String seasonnum;
-    @Element
-    private String airdate;
-    @Element(required = false)
-    private String link;
-    @Element
-    private String title;
-    @Element(required = false)
-    private String screencap;
+    @Override
+    public String toString() {
+        return this.getTitle();
+    }
 }
